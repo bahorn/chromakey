@@ -1,0 +1,16 @@
+{
+    "name": "Chromakey",
+    "version": "0.1",
+    "description": "WebSocket control for chrome",
+    "manifest_version": 2,
+    "background": {
+        "scripts": [
+            "src/contrib/socket.io.js",
+            "src/background.js"
+        ],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs"
+    ]
+}

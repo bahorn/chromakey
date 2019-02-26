@@ -1,19 +1,6 @@
 /* eslint no-undef: 0 */
 
-const state = {
-  connected: false,
-};
-
-const openPage = (url) => {
-  chrome.tabs.create({
-    url,
-  });
-};
-
-
-const host = 'http://localhost:3000';
-
-const socket = io(host);
+const socket = io(state.host);
 
 socket.on('connect', () => {
   state.connected = true;
@@ -24,5 +11,5 @@ socket.on('disconnect', () => {
 });
 
 socket.on('newtab', (event) => {
-  openPage(event.url);
+  openTab(event.url);
 });

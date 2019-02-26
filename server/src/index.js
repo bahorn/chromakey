@@ -1,11 +1,23 @@
 /* eslint no-console: 0 */
-const app = require('express')();
+const express = require('express');
+
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-io.on('connection', (socket) => {
+app.use(express.json());
+
+
+io.on('connection', () => {
   console.log('a user connected');
-  socket.emit('newtab', { url: 'https://facebook.com/' });
+});
+
+
+app.post('/', (req, res) => {
+  if (req.body.url) {
+    io.emit('newtab', { url: req.body.url });
+    res.send(req.body.url);
+  }
 });
 
 http.listen(3000, () => {
